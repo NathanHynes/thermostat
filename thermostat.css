@@ -9,6 +9,13 @@ h1 {
   font-size: 100px;
 }
 
+#feedback {
+  text-align: center;
+  display: block;
+  position: relative;
+  top: 44px;
+}
+
 .dot {
   height: 300px;
   width: 300px;
@@ -17,6 +24,7 @@ h1 {
   margin: auto;
   box-shadow: 8px 6px 5px #CCCC;
   background-color: #fff679;
+  margin-top: 30px;
 }
 
 p {
@@ -31,7 +39,7 @@ p {
   background-color: #e0ded7;
 }
 
-.up {
+#temperature-up {
   font-size: 45px;
   text-decoration: none;
   position: relative;
@@ -39,7 +47,7 @@ p {
   left: 41px;
 }
 
-.down {
+#temperature-down {
   font-size: 92px;
   text-decoration: none;
   position: relative;
@@ -47,7 +55,7 @@ p {
   left: 197px;
 }
 
-.energy {
+#energy {
   font-size: 20px;
   position: relative;
   bottom: 168px;
@@ -69,4 +77,16 @@ button {
   margin: auto;
   height: 30px;
   border-radius: 20%
+}
+
+.low-usage {
+  color: blue;
+}
+
+.medium-usage {
+  color: green;
+}
+
+.high-usage {
+  color: red;
 }

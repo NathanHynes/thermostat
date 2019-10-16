@@ -65,6 +65,7 @@ describe('Thermostat', function() {
   describe('switchOnPowerSaving', function () {
     it('turns power saving mode on', function () {
       thermostat.switchOffPowerSaving();
+      expect(thermostat.isPowerSavingModeOn()).toBe(false);
       thermostat.switchOnPowerSaving();
       expect(thermostat.isPowerSavingModeOn()).toBe(true)
     });
@@ -90,14 +91,12 @@ describe('Thermostat', function() {
       expect(thermostat.energyStatus()).toEqual("medium-usage");
     });
 
-    it('should show the current enery usage as being high when 25 and above', function () {
+    it('should show the current enery usage as being high when over 25', function () {
+      thermostat.switchOffPowerSaving();
       for ( var i = 0; i < 6; i++ ) {
       thermostat.up();
      }
       expect(thermostat.energyStatus()).toEqual("high-usage");
     });
-
-    
-
   });
 });

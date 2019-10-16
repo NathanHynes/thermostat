@@ -1,9 +1,12 @@
 'use strict';
 
 function Thermostat() {
-  this.maximum_tempature = 25;
+  this.MAX_LIMIT_PSM_ON = 25;
+  this.MEDIUM_ENERGY_USAGE_LIMIT = 18;
+  this.MAX_LIMIT_PSM_OFF = 32;
   this.MINIMUM_TEMPERATURE = 10;
-  this.temperature = 20;
+  this.DEFAULT_TEMPERATURE = 20;
+  this.temperature = this.DEFAULT_TEMPERATURE;
   this.powerSavingMode = true;
 }
 
@@ -17,7 +20,7 @@ Thermostat.prototype.up = function() {
 Thermostat.prototype.down = function() {
   if (this.isMinimumTemperature()) {
     return;
-  };
+  }
   this.temperature -= 1;
 };
 
@@ -26,7 +29,10 @@ Thermostat.prototype.isMinimumTemperature = function() {
 };
 
 Thermostat.prototype.isMaximumTemperature = function() {
-  return this.temperature === this.maximum_tempature;
+  if (this.isPowerSavingModeOn()) {
+    return this.temperature >= this.MAX_LIMIT_PSM_ON;
+  }
+  return this.temperature >= this.MAX_LIMIT_PSM_OFF;
 };
 
 Thermostat.prototype.getCurrentTemperature = function() {
@@ -34,29 +40,30 @@ Thermostat.prototype.getCurrentTemperature = function() {
 };
 
 Thermostat.prototype.isPowerSavingModeOn = function () {
-  return this.powerSavingMode;
+  return this.powerSavingMode === true;
 };
 
 Thermostat.prototype.switchOffPowerSaving = function () {
   this.powerSavingMode = false;
-  this.maximum_tempature = 32;
-
 };
 
 Thermostat.prototype.switchOnPowerSaving = function () {
   this.powerSavingMode = true;
-  this.maximum_tempature = 25;
+  if (this.temperature > 25) {
+    this.temperature = 25;
+  }
 };
 
 Thermostat.prototype.reset = function () {
-  this.temperature = 20;
+  this.temperature = this.DEFAULT_TEMPERATURE;
 };
 
 Thermostat.prototype.energyStatus = function () {
-  if ( this.temperature < 18 ) {
-    return 'low-usage'
-  } else if ( this.temperature > 18 && this.temperature < 25 ) {
-    return 'medium-usage'
+  if (this.temperature < this.MEDIUM_ENERGY_USAGE_LIMIT) {
+    return 'low-usage';
   }
-    return 'high-usage'
+  if (this.temperature >= this.MEDIUM_ENERGY_USAGE_LIMIT && this.temperature <= this.MAX_LIMIT_PSM_ON) {
+    return 'medium-usage';
+  }
+  return 'high-usage';
 };
