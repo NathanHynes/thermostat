@@ -9,6 +9,10 @@ h1 {
   font-size: 100px;
 }
 
+.thermostat {
+  text-align: center;
+}
+
 #feedback {
   text-align: center;
   display: block;
@@ -44,7 +48,7 @@ p {
   text-decoration: none;
   position: relative;
   bottom: 157px;
-  left: 41px;
+  right: 28px;
 }
 
 #temperature-down {
@@ -52,7 +56,7 @@ p {
   text-decoration: none;
   position: relative;
   bottom: 145px;
-  left: 197px;
+  left: 119px;
 }
 
 #energy {
@@ -63,7 +67,7 @@ p {
 }
 
 .eco {
-  left: 15px;
+  right: 69px;
 }
 
 a:visited {
@@ -72,7 +76,6 @@ a:visited {
 
 button {
   position: relative;
-  left: 55px;
   bottom: 100px;
   margin: auto;
   height: 30px;

@@ -7,18 +7,24 @@
   <title>ThermoBot</title>
   <script src="src/thermostat.js"></script>
   <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="src/interface.js"></script>
 </head>
 
 <body>
   <div class="thermostat">
     <h1 id="header"></h1>
+      <label for="city">Check the weather in:</label>
+      <input id='city' type="text" name="city" placeholder="Enter city name">
+      <input id="city-submit" type="submit" name="submit" value="submit">
+    <br><br>
+    <span>Temperature in </span><span id="current-weather"></span><span>&#8451;</span>
     <div class="dot">
       <p id="temperature"></p>
       <a id="temperature-up" href="#">+</a>
       <a id="temperature-down" href="#">-</a>
-      <button id = "eco" class="eco" type="button" name="powerSavingMode">Eco</button>
-      <button  id="temperature-reset" class="reset" type="button" name="Reset">Reset</button>
+      <button id="eco" class="eco" type="button" name="powerSavingMode">Eco</button>
+      <button id="temperature-reset" class="reset" type="button" name="Reset">Reset</button>
       <p id='energy'></p>
     </div>
     <span id="feedback"></span>
