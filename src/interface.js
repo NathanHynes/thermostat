@@ -1,8 +1,17 @@
 $(document).ready(function() {
   $('#header').text('ThermoBot');
   var thermostat = new Thermostat();
-  updateTemperature();
 
+  $.get('http://localhost:9292/temperature', function(data) {
+    console.log(data)
+  obj = JSON.parse(data);
+
+  thermostat.temperature = obj.temp;
+  thermostat.powerSavingMode = obj.power;
+  $('#temperature').text(thermostat.temperature);
+});
+
+  updateTemperature();
   displayWeather('london');
 
 
@@ -14,11 +23,13 @@ $(document).ready(function() {
   $("#temperature-up").click(function() {
     thermostat.up();
     updateTemperature();
+    sendState();
   });
 
   $("#temperature-down").click(function() {
     thermostat.down();
     updateTemperature();
+    sendState();
   });
 
   $("#temperature-reset").click(function() {
@@ -27,6 +38,7 @@ $(document).ready(function() {
     $("#feedback").fadeOut("slow");
     thermostat.reset();
     updateTemperature();
+    sendState()
   });
 
   $("#eco").click(function() {
@@ -42,6 +54,7 @@ $(document).ready(function() {
       $("#feedback").fadeOut("slow");
     }
     updateTemperature();
+    // sendState()
   });
 
 
@@ -59,5 +72,10 @@ $(document).ready(function() {
     $.get(url + appid + unit, function(data) {
       $('#current-weather').text(`${data.name}, ${data.sys.country}: ${data.main.temp}`);
     });
+  }
+
+  function sendState() {
+    var data = {temperature: thermostat.temperature, power: thermostat.powerSavingMode};
+    $.post('http://localhost:9292/receive', data);
   }
 });
